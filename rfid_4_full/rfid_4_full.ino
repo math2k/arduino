@@ -17,7 +17,7 @@ uchar serNum[5];
 byte misoPins[4] = {12, 8, 6, 5};
 bool tagStatus[4] = {false, false, false, false};
 uint8_t validTags[4] = {98, 39, 96, 207};
-const int relay = 3;
+const int relay = 2;
 
 
 void setup()
@@ -36,20 +36,24 @@ void loop()
   uchar currentTag;
   //checkRFID(1);
   for(int i = 0; i < sizeof(misoPins); i++){
-    
+    Serial.print("Pin :");
+    Serial.print(misoPins[i]);
+    Serial.print("#");
     Serial.print(i);
+    Serial.print(": ");
     currentTag = checkRFID(i);
-    /*Serial.print(currentTag);
+    Serial.print(currentTag);
     Serial.print(" - ");
     Serial.print(validTags[i]);
-    Serial.println();*/    
+   
     if(currentTag == validTags[i]){
       tagStatus[i] = true;
-      Serial.println(" is correct");
+      Serial.print(" is correct");
     } else {
       tagStatus[i] = false;
-      Serial.println(" is incorrect");      
+      Serial.print(" is incorrect");      
     }
+    Serial.println("");
   }
   if(tagStatus[0] && tagStatus[1] && tagStatus[2] && tagStatus[3]){
     Serial.println("Bingo!");
@@ -73,7 +77,7 @@ uint8_t checkRFID(int idx){
   //Serial.println(i);
   if (status != MI_OK)
   {
-    return;
+    return 0;
   }
   //Prevent conflict, return the 4 bytes Serial number of the card
   status = rfid.anticoll(str);
