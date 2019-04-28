@@ -22,11 +22,7 @@ void loop() {
   bool changed = false;
   for(int i=0; i<8; i++){
     int pos;
-    if(i == 5){
-      pos = digitalRead(switchPins[i]);
-    } else {
-      pos = currentPositions[i];//digitalRead(switchPins[i]);
-    }
+    pos = digitalRead(switchPins[i]);
     if(pos != currentPositions[i]) {
       changed = true;
       Serial.print("Changed ");
