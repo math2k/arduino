@@ -2,8 +2,8 @@
 #include <WebServer.h>
 
 /*Put your SSID & Password*/
-const char* ssid = "whisfyn";  // Enter SSID here
-const char* password = "facileadevinerpourtant";  //Enter Password here
+const char* ssid = "xxx";  // Enter SSID here
+const char* password = "xxx";  //Enter Password here
 
 WebServer server(80);
 
